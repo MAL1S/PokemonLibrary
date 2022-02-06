@@ -1,7 +1,8 @@
-package com.example.pokemonlibrary
+package com.example.pokemonlibrary.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.pokemonlibrary.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

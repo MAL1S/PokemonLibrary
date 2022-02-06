@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.pokemonlibrary.ui.menu.MenuFragment"
+        android:name="com.example.pokemonlibrary.presentation.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" >
         <action
@@ -22,17 +22,17 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.pokemonlibrary.ui.favorite.FavoriteFragment"
+        android:name="com.example.pokemonlibrary.presentation.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.pokemonlibrary.ui.search.SearchFragment"
+        android:name="com.example.pokemonlibrary.presentation.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/randomFragment"
-        android:name="com.example.pokemonlibrary.ui.random.RandomFragment"
+        android:name="com.example.pokemonlibrary.presentation.random.RandomFragment"
         android:label="fragment_random"
         tools:layout="@layout/fragment_random" />
 </navigation>
