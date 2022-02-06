@@ -32,6 +32,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -46,6 +53,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+
+    // RxBinding
+    implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0"
 
     //view binding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.7'
