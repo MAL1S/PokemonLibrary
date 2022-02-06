@@ -1,4 +1,4 @@
-package com.example.pokemonlibrary.ui
+package com.example.pokemonlibrary.ui.random
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pokemonlibrary.R
 
-class MenuFragment : Fragment() {
+class RandomFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        return inflater.inflate(R.layout.fragment_random, container, false)
     }
 }
