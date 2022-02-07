@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.pokemonlibrary.R
 import com.example.pokemonlibrary.app.App
 import com.example.pokemonlibrary.databinding.FragmentSearchBinding
 import com.example.pokemonlibrary.domain.model.Pokemon
-import com.example.pokemonlibrary.domain.model.PokemonForm
+import com.example.pokemonlibrary.domain.model.PokemonStat
 import com.example.pokemonlibrary.presentation.adapter.PokemonRecyclerViewAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,7 +29,9 @@ class SearchFragment : Fragment() {
 
     private val mBinding by viewBinding(FragmentSearchBinding::bind)
 
-    private lateinit var mAdapter: PokemonRecyclerViewAdapter
+    private lateinit var mAdapterForms: PokemonRecyclerViewAdapter
+    private lateinit var mAdapterAbilities: PokemonRecyclerViewAdapter
+    private lateinit var mAdapterHeldItems: PokemonRecyclerViewAdapter
 
     private lateinit var subscribe: Disposable
 
@@ -64,14 +65,12 @@ class SearchFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d("AAA", "TYPEd = $it")
-                mViewModel.getPokemonsByName(it.toString())
+                mViewModel.getPokemonsByName(it.toString().lowercase())
             }, {
                 Log.d("pokemon_list_search", "${it.message}")
             })
 
         mViewModel.pokemonLiveData.observe(viewLifecycleOwner) {
-            Log.d("AAA", "observed = $it")
             if (it != null && it.id != 0) {
                 bindCardView(it)
             } else if (mBinding.etSearchPokemonName.text.toString().isEmpty()) {
@@ -90,15 +89,33 @@ class SearchFragment : Fragment() {
         mBinding.textInputLayoutSearchPokemonName.error = ""
         mBinding.ivSearchNothingFound.visibility = View.INVISIBLE
         mBinding.searchCardLayout.visibility = View.VISIBLE
-
+        
         mBinding.searchCardPokemon.tvPokemonName.text = pokemon.name
         mBinding.searchCardPokemon.tvPokemonBaseExp.text = "Base exp: ${pokemon.baseExperience}"
 
-        mAdapter = PokemonRecyclerViewAdapter(
-            pokemon.forms ?: listOf(PokemonForm(name = "No forms"))
+        mBinding.searchCardPokemon.tvPokemonWeight.text = pokemon.weight.toString()
+        mBinding.searchCardPokemon.tvPokemonHeight.text = pokemon.height.toString()
+
+        //forms
+        mAdapterForms = PokemonRecyclerViewAdapter(
+            pokemon.forms?.map { it.name } ?: listOf("No forms")
         )
-        mBinding.searchCardPokemon.rcvPokemonForms.adapter = mAdapter
-        mAdapter.notifyDataSetChanged()
+        mBinding.searchCardPokemon.rcvPokemonForms.adapter = mAdapterForms
+        mAdapterForms.notifyDataSetChanged()
+
+        //abilities
+        mAdapterAbilities = PokemonRecyclerViewAdapter(
+            pokemon.abilities?.map { it.ability.name } ?: listOf("No abilities")
+        )
+        mBinding.searchCardPokemon.rcvPokemonAbilities.adapter = mAdapterAbilities
+        mAdapterAbilities.notifyDataSetChanged()
+
+        //held items
+        mAdapterHeldItems = PokemonRecyclerViewAdapter(
+            pokemon.heldItems?.map { it.item.name } ?: listOf("No abilities")
+        )
+        mBinding.searchCardPokemon.rcvPokemonHeldItems.adapter = mAdapterHeldItems
+        mAdapterHeldItems.notifyDataSetChanged()
 
         loadPokemonImage(pokemon.sprite.frontDefault)
     }
@@ -110,9 +127,9 @@ class SearchFragment : Fragment() {
             .into(mBinding.searchCardPokemon.ivPokemonImage)
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         subscribe.dispose()
         mViewModel.pokemonLiveData.removeObservers(viewLifecycleOwner)
-        super.onDestroy()
+        super.onDestroyView()
     }
 }
