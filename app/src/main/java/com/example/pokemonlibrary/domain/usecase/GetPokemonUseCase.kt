@@ -10,7 +10,7 @@ class GetPokemonUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
 
-    fun get(name: String): Observable<List<Pokemon>> = repository.getPokemonsByName(name = name)
+    fun get(name: String): Observable<Pokemon> = repository.getPokemonByName(name = name)
 
     fun get(id: Int): Single<Pokemon> = repository.getPokemonById(id = id)
 }

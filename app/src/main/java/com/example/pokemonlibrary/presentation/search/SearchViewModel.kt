@@ -19,29 +19,34 @@ class SearchViewModel @Inject constructor(
     private val getPokemonUseCase: GetPokemonUseCase
 ): ViewModel() {
 
-    private val _pokemonListLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    val pokemonListLiveData: LiveData<List<Pokemon>> = _pokemonListLiveData
+    private val _pokemonLiveData: MutableLiveData<Pokemon> = MutableLiveData()
+    val pokemonLiveData: LiveData<Pokemon> = _pokemonLiveData
 
-    fun getPokemonsByName(name: String, rxTextView: RxTextView) {
+    fun getPokemonsByName(name: String) {
         getPokemonUseCase.get(name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(getPokemonListObserver())
+            .subscribe(getPokemonObserver())
     }
 
-    private fun getPokemonListObserver(): Observer<List<Pokemon>> {
-        return object : Observer<List<Pokemon>> {
-            override fun onSubscribe(d: Disposable) {}
+    private fun getPokemonObserver(): Observer<Pokemon> {
+        return object : Observer<Pokemon> {
+            override fun onSubscribe(d: Disposable) {
 
-            override fun onNext(t: List<Pokemon>) {
-                _pokemonListLiveData.postValue(t)
+            }
+
+            override fun onNext(t: Pokemon) {
+                Log.d("AAA", "$t")
+                _pokemonLiveData.postValue(t)
             }
 
             override fun onError(e: Throwable) {
-                Log.d("pokemon_list_search", "${e.message}")
+                _pokemonLiveData.postValue(null)
             }
 
-            override fun onComplete() {}
+            override fun onComplete() {
+
+            }
         }
     }
 }
