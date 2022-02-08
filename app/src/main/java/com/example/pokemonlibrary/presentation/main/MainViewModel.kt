@@ -52,10 +52,4 @@ class MainViewModel @Inject constructor(
                 Log.d("AAA", "error = ${it}")
             })
     }
-
-//    fun getPokemonCount() {
-//        savePokemonUseCase.savePokemonIds(it.pokemons.map { pokemon ->
-//            PokemonId(pokemon.url.split("/").last().toInt())
-//        })
-//    }
 }

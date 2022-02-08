@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.pokemonlibrary.domain.model.Pokemon
 import com.example.pokemonlibrary.domain.model.PokemonId
+import io.reactivex.Observable
 import io.reactivex.Single
 
 @Dao
@@ -19,4 +20,10 @@ interface PokeDao {
 
     @Query("SELECT * FROM pokemon_id")
     fun getPokemonIds(): Single<List<PokemonId>>
+
+    @Query("SELECT * FROM pokemon_table")
+    fun getFavoritePokemonList(): Observable<List<Pokemon>>
+
+    @Query("DELETE FROM pokemon_table WHERE id = :id")
+    fun removePokemonById(id: Int)
 }

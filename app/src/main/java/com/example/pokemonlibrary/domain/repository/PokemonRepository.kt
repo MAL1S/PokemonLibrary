@@ -10,13 +10,17 @@ interface PokemonRepository {
 
     fun savePokemon(pokemon: Pokemon)
 
-    fun savePokemonIds(ids: List<PokemonId>)
+    fun removePokemonById(id: Int)
 
-    fun getPokemonIds(): Single<List<PokemonId>>
+    fun savePokemonIdList(ids: List<PokemonId>)
+
+    fun getPokemonIdList(): Single<List<PokemonId>>
 
     fun getPokemonByName(name: String): Observable<Pokemon>
 
     fun getPokemonById(id: Int): Single<Pokemon>
+
+    fun getFavoritePokemonList(): Observable<List<Pokemon>>
 
     fun getPokemonsOverallData(offset: Int, limit: Int): Single<PokemonOverallData>
 }

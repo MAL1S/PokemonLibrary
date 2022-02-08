@@ -12,7 +12,7 @@ import com.example.pokemonlibrary.R
 import com.example.pokemonlibrary.app.App
 import com.example.pokemonlibrary.databinding.FragmentRandomBinding
 import com.example.pokemonlibrary.domain.model.Pokemon
-import com.example.pokemonlibrary.presentation.adapter.PokemonRecyclerViewAdapter
+import com.example.pokemonlibrary.presentation.adapter.pokemon_forms.PokemonFormsRecyclerViewAdapter
 import com.example.pokemonlibrary.presentation.search.SearchViewModel
 import javax.inject.Inject
 
@@ -26,9 +26,9 @@ class RandomFragment : Fragment() {
     @Inject
     lateinit var searchViewModel: SearchViewModel
 
-    private lateinit var mAdapterForms: PokemonRecyclerViewAdapter
-    private lateinit var mAdapterAbilities: PokemonRecyclerViewAdapter
-    private lateinit var mAdapterHeldItems: PokemonRecyclerViewAdapter
+    private lateinit var mAdapterForms: PokemonFormsRecyclerViewAdapter
+    private lateinit var mAdapterAbilities: PokemonFormsRecyclerViewAdapter
+    private lateinit var mAdapterHeldItems: PokemonFormsRecyclerViewAdapter
 
     private var currentPokemon: Pokemon? = null
 
@@ -83,14 +83,14 @@ class RandomFragment : Fragment() {
         mBinding.randomCardPokemon.tvPokemonHeight.text = pokemon.height.toString()
 
         //forms
-        mAdapterForms = PokemonRecyclerViewAdapter(
+        mAdapterForms = PokemonFormsRecyclerViewAdapter(
             pokemon.forms?.map { it.name } ?: listOf("No forms")
         )
         mBinding.randomCardPokemon.rcvPokemonForms.adapter = mAdapterForms
         mAdapterForms.notifyDataSetChanged()
 
         //abilities
-        mAdapterAbilities = PokemonRecyclerViewAdapter(
+        mAdapterAbilities = PokemonFormsRecyclerViewAdapter(
             pokemon.abilities?.map { it.ability.name } ?: listOf("No abilities")
         )
         mBinding.randomCardPokemon.rcvPokemonAbilities.adapter = mAdapterAbilities
@@ -98,7 +98,7 @@ class RandomFragment : Fragment() {
 
         //held items
         val pokemonHeldItems = pokemon.heldItems.map { it.item.name }
-        mAdapterHeldItems = PokemonRecyclerViewAdapter(
+        mAdapterHeldItems = PokemonFormsRecyclerViewAdapter(
             pokemonHeldItems.ifEmpty { listOf("No held items") }
         )
         mBinding.randomCardPokemon.rcvPokemonHeldItems.adapter = mAdapterHeldItems

@@ -13,7 +13,7 @@ import com.example.pokemonlibrary.R
 import com.example.pokemonlibrary.app.App
 import com.example.pokemonlibrary.databinding.FragmentSearchBinding
 import com.example.pokemonlibrary.domain.model.Pokemon
-import com.example.pokemonlibrary.presentation.adapter.PokemonRecyclerViewAdapter
+import com.example.pokemonlibrary.presentation.adapter.pokemon_forms.PokemonFormsRecyclerViewAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -28,9 +28,9 @@ class SearchFragment : Fragment() {
 
     private val mBinding by viewBinding(FragmentSearchBinding::bind)
 
-    private lateinit var mAdapterForms: PokemonRecyclerViewAdapter
-    private lateinit var mAdapterAbilities: PokemonRecyclerViewAdapter
-    private lateinit var mAdapterHeldItems: PokemonRecyclerViewAdapter
+    private lateinit var mAdapterForms: PokemonFormsRecyclerViewAdapter
+    private lateinit var mAdapterAbilities: PokemonFormsRecyclerViewAdapter
+    private lateinit var mAdapterHeldItems: PokemonFormsRecyclerViewAdapter
 
     private lateinit var subscribe: Disposable
 
@@ -106,14 +106,14 @@ class SearchFragment : Fragment() {
         mBinding.searchCardPokemon.tvPokemonHeight.text = pokemon.height.toString()
 
         //forms
-        mAdapterForms = PokemonRecyclerViewAdapter(
+        mAdapterForms = PokemonFormsRecyclerViewAdapter(
             pokemon.forms?.map { it.name } ?: listOf("No forms")
         )
         mBinding.searchCardPokemon.rcvPokemonForms.adapter = mAdapterForms
         mAdapterForms.notifyDataSetChanged()
 
         //abilities
-        mAdapterAbilities = PokemonRecyclerViewAdapter(
+        mAdapterAbilities = PokemonFormsRecyclerViewAdapter(
             pokemon.abilities?.map { it.ability.name } ?: listOf("No abilities")
         )
         mBinding.searchCardPokemon.rcvPokemonAbilities.adapter = mAdapterAbilities
@@ -121,7 +121,7 @@ class SearchFragment : Fragment() {
 
         //held items
         val pokemonHeldItems = pokemon.heldItems.map { it.item.name }
-        mAdapterHeldItems = PokemonRecyclerViewAdapter(
+        mAdapterHeldItems = PokemonFormsRecyclerViewAdapter(
             pokemonHeldItems.ifEmpty { listOf("No held items") }
         )
         mBinding.searchCardPokemon.rcvPokemonHeldItems.adapter = mAdapterHeldItems

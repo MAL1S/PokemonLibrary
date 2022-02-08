@@ -35,5 +35,8 @@ class MenuFragment : Fragment() {
         mBinding.btnRandomScreen.setOnClickListener {
             view.findNavController().navigate(R.id.action_menuFragment_to_randomFragment)
         }
+        mBinding.btnFavoriteScreen.setOnClickListener {
+            view.findNavController().navigate(R.id.action_menuFragment_to_favoriteFragment)
+        }
     }
 }
