@@ -32,5 +32,8 @@ class MenuFragment : Fragment() {
         mBinding.btnSearchScreen.setOnClickListener {
             view.findNavController().navigate(R.id.action_menuFragment_to_searchFragment)
         }
+        mBinding.btnRandomScreen.setOnClickListener {
+            view.findNavController().navigate(R.id.action_menuFragment_to_randomFragment)
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.pokemonlibrary.domain.usecase
 
 import com.example.pokemonlibrary.domain.model.Pokemon
+import com.example.pokemonlibrary.domain.model.PokemonId
 import com.example.pokemonlibrary.domain.repository.PokemonRepository
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -13,4 +14,6 @@ class GetPokemonUseCase @Inject constructor(
     fun get(name: String): Observable<Pokemon> = repository.getPokemonByName(name = name)
 
     fun get(id: Int): Single<Pokemon> = repository.getPokemonById(id = id)
+
+    fun getPokemonIds(): Single<List<PokemonId>> = repository.getPokemonIds()
 }

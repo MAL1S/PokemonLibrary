@@ -24,6 +24,10 @@ class PokemonRepositoryImpl @Inject constructor(
         return pokeDao.insertIds(ids)
     }
 
+    override fun getPokemonIds(): Single<List<PokemonId>> {
+        return pokeDao.getPokemonIds()
+    }
+
     override fun getPokemonByName(name: String): Observable<Pokemon> {
         return pokeApi.getPokemonByName(name)
     }

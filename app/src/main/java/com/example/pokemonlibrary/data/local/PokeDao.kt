@@ -16,4 +16,7 @@ interface PokeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIds(ids: List<PokemonId>)
+
+    @Query("SELECT * FROM pokemon_id")
+    fun getPokemonIds(): Single<List<PokemonId>>
 }

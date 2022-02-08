@@ -12,6 +12,8 @@ interface PokemonRepository {
 
     fun savePokemonIds(ids: List<PokemonId>)
 
+    fun getPokemonIds(): Single<List<PokemonId>>
+
     fun getPokemonByName(name: String): Observable<Pokemon>
 
     fun getPokemonById(id: Int): Single<Pokemon>

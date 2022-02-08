@@ -15,9 +15,10 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_pokemon_name"
             style="@style/card_pokemon_title_text_style"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/app_margin_medium"
+            android:layout_marginHorizontal="@dimen/app_margin_medium"
+            android:layout_marginTop="@dimen/app_margin_medium"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Pikachu" />
@@ -27,9 +28,9 @@
             style="@style/card_pokemon_exp_title_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/app_margin_medium"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_pokemon_name"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="@dimen/app_margin_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_name"
             tools:text="Base exp: 120" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -38,9 +39,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_margin_medium"
+            android:layout_marginTop="@dimen/app_margin_medium"
             android:text="Height: "
+            app:layout_constraintBottom_toTopOf="@+id/tv_pokemon_title_weight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_base_exp"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_pokemon_height"
@@ -59,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_margin_medium"
             android:text="Weight: "
+            app:layout_constraintBottom_toTopOf="@+id/tv_pokemon_title_forms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_title_height" />
 
@@ -76,10 +81,10 @@
             android:id="@+id/iv_pokemon_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginEnd="@dimen/app_margin_medium"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_pokemon_base_exp"
             app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_name"
             tools:src="@drawable/pikachu" />
 
@@ -91,7 +96,7 @@
             android:layout_margin="@dimen/app_margin_medium"
             android:text="Forms:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_title_weight" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_pokemon_image" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_pokemon_forms"
