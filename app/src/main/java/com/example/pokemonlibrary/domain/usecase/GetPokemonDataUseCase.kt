@@ -1,5 +1,6 @@
 package com.example.pokemonlibrary.domain.usecase
 
+import android.util.Log
 import com.example.pokemonlibrary.domain.model.PokemonOverallData
 import com.example.pokemonlibrary.domain.repository.PokemonRepository
 import io.reactivex.Single
@@ -9,5 +10,7 @@ class GetPokemonDataUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
 
-    fun getPokemonCount(): Single<PokemonOverallData> = repository.getPokemonsOverallCount()
+    fun getPokemonOverallData(offset: Int, limit: Int): Single<PokemonOverallData> {
+        return repository.getPokemonsOverallData(offset = offset, limit = limit)
+    }
 }

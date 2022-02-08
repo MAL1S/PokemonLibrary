@@ -5,4 +5,5 @@
     <string name="btn_menu_search">search</string>
     <string name="btn_menu_random">random</string>
     <string name="btn_menu_favorite">favorite</string>
+    <string name="et_pokemon_search_hint">Desired pokemon name</string>
 </resources>

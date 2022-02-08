@@ -31,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_menu"
         app:strokeColor="@color/black"
+        app:rippleColor="@color/black"
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -49,6 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_search_screen"
         app:strokeColor="@color/orange"
+        app:rippleColor="@color/orange"
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -60,13 +62,14 @@
         android:text="@string/btn_menu_favorite"
         android:textColor="@color/red"
         app:cornerRadius="12dp"
-        app:icon="@drawable/ic_favorite_24dp"
+        app:icon="@drawable/ic_favorite_outlined_24dp"
         app:iconPadding="-24dp"
         app:iconTint="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_random_screen"
         app:strokeColor="@color/red"
+        app:rippleColor="@color/red"
         app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

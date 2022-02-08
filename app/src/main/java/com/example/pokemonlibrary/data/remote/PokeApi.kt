@@ -6,15 +6,19 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PokeApi {
 
+    @GET("pokemon")
+    fun getPokemonOverallData(
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
+    ): Single<PokemonOverallData>
+
     @GET("pokemon/{name}")
-    fun getPokemonByName(@Path("name") name: String): Observable<List<Pokemon>>
+    fun getPokemonByName(@Path("name") name: String): Observable<Pokemon>
 
     @GET("pokemon/{id}")
     fun getPokemonById(@Path("id") id: Int): Single<Pokemon>
-
-    @GET("pokemon")
-    fun getPokemonOverallData(): Single<PokemonOverallData>
 }

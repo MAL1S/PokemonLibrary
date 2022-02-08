@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textview.MaterialTextView
+    android:id="@+id/tv_item_pokemon_form"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:text="Form name"
+    android:drawableStart="@drawable/ic_item"
+    app:drawableTint="@color/grey"
+    style="@style/card_pokemon_forms_list_item_text_style" />
