@@ -15,5 +15,7 @@ class GetPokemonUseCase @Inject constructor(
 
     fun get(id: Int): Single<Pokemon> = repository.getPokemonById(id = id)
 
-    fun getPokemonIds(): Single<List<PokemonId>> = repository.getPokemonIds()
+    fun getPokemonIds(): Single<List<PokemonId>> = repository.getPokemonIdList()
+
+    fun getFavoritePokemonList(): Observable<List<Pokemon>> = repository.getFavoritePokemonList()
 }

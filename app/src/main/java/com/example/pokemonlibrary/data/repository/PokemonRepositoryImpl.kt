@@ -20,11 +20,15 @@ class PokemonRepositoryImpl @Inject constructor(
         return pokeDao.insertPokemon(pokemon)
     }
 
-    override fun savePokemonIds(ids: List<PokemonId>) {
+    override fun removePokemonById(id: Int) {
+        pokeDao.removePokemonById(id)
+    }
+
+    override fun savePokemonIdList(ids: List<PokemonId>) {
         return pokeDao.insertIds(ids)
     }
 
-    override fun getPokemonIds(): Single<List<PokemonId>> {
+    override fun getPokemonIdList(): Single<List<PokemonId>> {
         return pokeDao.getPokemonIds()
     }
 
@@ -34,6 +38,10 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override fun getPokemonById(id: Int): Single<Pokemon> {
         return pokeApi.getPokemonById(id)
+    }
+
+    override fun getFavoritePokemonList(): Observable<List<Pokemon>> {
+        return pokeDao.getFavoritePokemonList()
     }
 
     override fun getPokemonsOverallData(offset: Int, limit: Int): Single<PokemonOverallData> {
