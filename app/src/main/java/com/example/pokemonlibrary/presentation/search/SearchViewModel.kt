@@ -4,19 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pokemonlibrary.data.remote.PokeApi
 import com.example.pokemonlibrary.domain.model.Pokemon
+import com.example.pokemonlibrary.domain.usecase.GetPokemonDataUseCase
 import com.example.pokemonlibrary.domain.usecase.GetPokemonUseCase
-import com.jakewharton.rxbinding2.widget.RxTextView
+import com.example.pokemonlibrary.domain.usecase.SavePokemonUseCase
 import io.reactivex.Observer
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val getPokemonUseCase: GetPokemonUseCase
+    private val getPokemonUseCase: GetPokemonUseCase,
+    private val savePokemonUseCase: SavePokemonUseCase
 ): ViewModel() {
 
     private val _pokemonLiveData: MutableLiveData<Pokemon> = MutableLiveData()
@@ -29,6 +30,17 @@ class SearchViewModel @Inject constructor(
             .subscribe(getPokemonObserver())
     }
 
+    fun addPokemonToFavorite(pokemon: Pokemon) {
+        val savePokemonSingleSubscribe = Single.just(pokemon)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe({
+                savePokemonUseCase.savePokemon(it)
+            }, {
+
+            })
+    }
+
     private fun getPokemonObserver(): Observer<Pokemon> {
         return object : Observer<Pokemon> {
             override fun onSubscribe(d: Disposable) {
@@ -36,11 +48,12 @@ class SearchViewModel @Inject constructor(
             }
 
             override fun onNext(t: Pokemon) {
-                Log.d("AAA", "$t")
+                Log.d("AAA", "LOADED")
                 _pokemonLiveData.postValue(t)
             }
 
             override fun onError(e: Throwable) {
+                Log.d("AAA", "ERROR")
                 _pokemonLiveData.postValue(null)
             }
 

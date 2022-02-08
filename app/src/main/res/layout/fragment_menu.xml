@@ -62,7 +62,7 @@
         android:text="@string/btn_menu_favorite"
         android:textColor="@color/red"
         app:cornerRadius="12dp"
-        app:icon="@drawable/ic_favorite_24dp"
+        app:icon="@drawable/ic_favorite_outlined_24dp"
         app:iconPadding="-24dp"
         app:iconTint="@color/red"
         app:layout_constraintEnd_toEndOf="parent"

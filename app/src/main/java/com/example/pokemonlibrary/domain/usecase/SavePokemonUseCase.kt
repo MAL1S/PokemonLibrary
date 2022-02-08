@@ -11,7 +11,7 @@ class SavePokemonUseCase @Inject constructor(
     private val pokeDao: PokeDao
 ) {
 
-    fun savePokemons(pokemon: Pokemon) {
+    fun savePokemon(pokemon: Pokemon) {
         pokeDao.insertPokemon(pokemon)
     }
 

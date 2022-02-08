@@ -13,7 +13,6 @@ import com.example.pokemonlibrary.R
 import com.example.pokemonlibrary.app.App
 import com.example.pokemonlibrary.databinding.FragmentSearchBinding
 import com.example.pokemonlibrary.domain.model.Pokemon
-import com.example.pokemonlibrary.domain.model.PokemonStat
 import com.example.pokemonlibrary.presentation.adapter.PokemonRecyclerViewAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,6 +34,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var subscribe: Disposable
 
+    private var currentPokemon: Pokemon? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -52,11 +53,16 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initVariables()
+        initListeners()
         initObservers()
     }
 
-    private fun initVariables() {
+    private fun initListeners() {
+        mBinding.searchCardPokemon.btnCardAddInFavorite.setOnClickListener {
+            if (currentPokemon != null) {
+                mViewModel.addPokemonToFavorite(pokemon = currentPokemon!!)
+            }
+        }
     }
 
     private fun initObservers() {
@@ -71,13 +77,14 @@ class SearchFragment : Fragment() {
             })
 
         mViewModel.pokemonLiveData.observe(viewLifecycleOwner) {
+            Log.d("AAA", "observed = $it")
             if (it != null && it.id != 0) {
                 bindCardView(it)
             } else if (mBinding.etSearchPokemonName.text.toString().isEmpty()) {
                 mBinding.textInputLayoutSearchPokemonName.error = ""
                 mBinding.searchCardLayout.visibility = View.INVISIBLE
                 mBinding.ivSearchNothingFound.visibility = View.VISIBLE
-            } else {
+            } else if (mBinding.etSearchPokemonName.text.toString() != currentPokemon?.name) {
                 mBinding.searchCardLayout.visibility = View.INVISIBLE
                 mBinding.ivSearchNothingFound.visibility = View.VISIBLE
                 mBinding.textInputLayoutSearchPokemonName.error = "Not found"
@@ -86,11 +93,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun bindCardView(pokemon: Pokemon) {
+        currentPokemon = pokemon
+
         mBinding.textInputLayoutSearchPokemonName.error = ""
         mBinding.ivSearchNothingFound.visibility = View.INVISIBLE
         mBinding.searchCardLayout.visibility = View.VISIBLE
         
-        mBinding.searchCardPokemon.tvPokemonName.text = pokemon.name
+        mBinding.searchCardPokemon.tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
         mBinding.searchCardPokemon.tvPokemonBaseExp.text = "Base exp: ${pokemon.baseExperience}"
 
         mBinding.searchCardPokemon.tvPokemonWeight.text = pokemon.weight.toString()
@@ -111,8 +120,9 @@ class SearchFragment : Fragment() {
         mAdapterAbilities.notifyDataSetChanged()
 
         //held items
+        val pokemonHeldItems = pokemon.heldItems.map { it.item.name }
         mAdapterHeldItems = PokemonRecyclerViewAdapter(
-            pokemon.heldItems?.map { it.item.name } ?: listOf("No abilities")
+            pokemonHeldItems.ifEmpty { listOf("No held items") }
         )
         mBinding.searchCardPokemon.rcvPokemonHeldItems.adapter = mAdapterHeldItems
         mAdapterHeldItems.notifyDataSetChanged()

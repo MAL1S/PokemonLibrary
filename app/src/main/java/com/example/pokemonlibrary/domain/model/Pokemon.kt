@@ -25,5 +25,5 @@ data class Pokemon(
     @SerializedName("sprites") val sprite: PokemonSprite,
     @SerializedName("forms") val forms: List<PokemonStat>?,
     @SerializedName("abilities") val abilities: List<PokemonAbility>?,
-    @SerializedName("held_items") val heldItems: List<PokemonHeldItem>?,
+    @SerializedName("held_items") val heldItems: List<PokemonHeldItem>
 )
