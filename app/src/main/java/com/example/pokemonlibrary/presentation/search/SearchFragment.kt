@@ -67,7 +67,7 @@ class SearchFragment : Fragment() {
 
     private fun initObservers() {
         subscribe = RxTextView.textChanges(mBinding.etSearchPokemonName)
-            .debounce(500, TimeUnit.MILLISECONDS)
+            .debounce(200, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

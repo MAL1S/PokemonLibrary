@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/iv_menu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_margin="@dimen/app_margin_medium"
         android:src="@drawable/pikachu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

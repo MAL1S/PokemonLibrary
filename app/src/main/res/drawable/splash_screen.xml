@@ -3,6 +3,6 @@
     <item android:drawable="@color/white"/>
 
     <item
-        android:drawable="@drawable/poke_api_image"
+        android:drawable="@drawable/poke_api"
         android:gravity="center"/>
 </layer-list>

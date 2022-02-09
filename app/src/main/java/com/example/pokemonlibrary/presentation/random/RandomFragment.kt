@@ -1,6 +1,7 @@
 package com.example.pokemonlibrary.presentation.random
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.pokemonlibrary.R
 import com.example.pokemonlibrary.app.App
 import com.example.pokemonlibrary.databinding.FragmentRandomBinding
@@ -57,6 +62,7 @@ class RandomFragment : Fragment() {
 
     private fun initListeners() {
         mBinding.btnRandomPokemon.setOnClickListener {
+            mBinding.randomCardLayout.visibility = View.GONE
             mViewModel.updateRandomPokemon()
         }
         mBinding.randomCardPokemon.btnCardAddInFavorite.setOnClickListener {
@@ -69,7 +75,6 @@ class RandomFragment : Fragment() {
     private fun initObservers() {
         mViewModel.randomPokemonLiveData.observe(viewLifecycleOwner) {
             bindCardView(it)
-            mBinding.randomCardLayout.visibility = View.VISIBLE
         }
     }
 
@@ -111,6 +116,29 @@ class RandomFragment : Fragment() {
         Glide
             .with(requireActivity())
             .load(url)
+            .listener(object: RequestListener<Drawable> {
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    mBinding.randomCardLayout.visibility = View.VISIBLE
+
+                    return false
+                }
+
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+            })
             .into(mBinding.randomCardPokemon.ivPokemonImage)
     }
 }
