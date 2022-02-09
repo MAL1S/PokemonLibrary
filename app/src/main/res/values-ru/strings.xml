@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PokemonLibrary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="btn_menu_search">поиск</string>
+    <string name="btn_menu_random">случайный</string>
+    <string name="btn_menu_favorite">избранные</string>
+    <string name="et_pokemon_search_hint">Желаемое имя покемона</string>
+    <string name="card_pokemon_height">Рост:</string>
+    <string name="card_pokemon_weight">Вес:</string>
+    <string name="card_pokemon_forms">Формы:</string>
+    <string name="card_pokemon_abilities">Способности:</string>
+    <string name="card_pokemon_held_items">Выпадающие предметы:</string>
+    <string name="card_btn_favorite_add">добавить в избранные</string>
+    <string name="search_not_found">Не найдено</string>
+    <string name="card_pokemon_forms_none">Нет форм</string>
+    <string name="card_pokemon_abilities_none">Нет способностей</string>
+    <string name="card_pokemon_held_items_none">Нет выпадающих предметов</string>
+    <string name="card_exp">Базовый опыт: %d</string>
+    <string name="card_btn_favorite_remove">убрать из избранных</string>
+</resources>
