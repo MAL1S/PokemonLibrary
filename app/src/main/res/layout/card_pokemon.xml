@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_margin_medium"
             android:layout_marginTop="@dimen/app_margin_medium"
-            android:text="Height: "
+            android:text="@string/card_pokemon_height"
             app:layout_constraintBottom_toTopOf="@+id/tv_pokemon_title_weight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_base_exp"
@@ -51,7 +51,7 @@
             style="@style/card_pokemon_forms_list_item_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="120"
+            tools:text="120"
             app:layout_constraintBottom_toBottomOf="@+id/tv_pokemon_title_height"
             app:layout_constraintStart_toEndOf="@+id/tv_pokemon_title_height"
             app:layout_constraintTop_toTopOf="@+id/tv_pokemon_title_height" />
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_margin_medium"
-            android:text="Weight: "
+            android:text="@string/card_pokemon_weight"
             app:layout_constraintBottom_toTopOf="@+id/tv_pokemon_title_forms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_title_height" />
@@ -72,15 +72,15 @@
             style="@style/card_pokemon_forms_list_item_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="120"
+            tools:text="120"
             app:layout_constraintBottom_toBottomOf="@+id/tv_pokemon_title_weight"
             app:layout_constraintStart_toEndOf="@+id/tv_pokemon_title_weight"
             app:layout_constraintTop_toTopOf="@+id/tv_pokemon_title_weight" />
 
         <ImageView
             android:id="@+id/iv_pokemon_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_iv_width"
+            android:layout_height="@dimen/card_iv_height"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_margin_medium"
-            android:text="Forms:"
+            android:text="@string/card_pokemon_forms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_pokemon_image" />
 
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_margin_medium"
-            android:text="Abilities:"
+            android:text="@string/card_pokemon_abilities"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_pokemon_forms" />
 
@@ -137,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_margin_medium"
-            android:text="Held items:"
+            android:text="@string/card_pokemon_held_items"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_pokemon_abilities" />
 
@@ -158,9 +158,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_margin_medium"
-            android:text="add in favorite"
+            android:text="@string/card_btn_favorite_add"
             android:textColor="@color/red"
-            app:cornerRadius="12dp"
+            app:cornerRadius="@dimen/material_button_corner_radius"
             app:icon="@drawable/ic_favorite_filled_24dp"
             app:iconPadding="-24dp"
             app:iconTint="@color/red"
@@ -170,7 +170,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rcv_pokemon_held_items"
             app:rippleColor="@color/red"
             app:strokeColor="@color/red"
-            app:strokeWidth="2dp" />
+            app:boxStrokeWidth="@dimen/material_button_stroke_width" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

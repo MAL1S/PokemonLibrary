@@ -31,14 +31,17 @@ class PokemonRecyclerViewHolder(
 
     fun bind(pokemon: Pokemon) {
         mBinding.tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
-        mBinding.tvPokemonBaseExp.text = "Base exp: ${pokemon.baseExperience}"
+        mBinding.tvPokemonBaseExp.text = activity.getString(
+            R.string.card_exp,
+            pokemon.baseExperience
+        )
 
         mBinding.tvPokemonWeight.text = pokemon.weight.toString()
         mBinding.tvPokemonHeight.text = pokemon.height.toString()
 
         mBinding.btnCardAddInFavorite.setIconResource(R.drawable.ic_favorite_outlined_24dp)
 
-        mBinding.btnCardAddInFavorite.text = "Remove from favorite"
+        mBinding.btnCardAddInFavorite.text = activity.getString(R.string.card_btn_favorite_remove)
         mBinding.btnCardAddInFavorite.setOnClickListener {
             onPokemonCardClickListener.onRemoveFromFavoriteClicked(
                 pokemon = pokemon,
@@ -49,7 +52,7 @@ class PokemonRecyclerViewHolder(
         //forms
         val pokemonForms = pokemon.forms?.map { it.name }
         mAdapterForms = PokemonFormsRecyclerViewAdapter(
-            pokemonForms ?: listOf("No forms")
+            pokemonForms ?: listOf(activity.getString(R.string.card_pokemon_forms_none))
         )
         mBinding.rcvPokemonForms.adapter = mAdapterForms
         mAdapterForms.notifyDataSetChanged()
@@ -57,7 +60,7 @@ class PokemonRecyclerViewHolder(
         //abilities
         val pokemonAbilities = pokemon.abilities?.map { it.ability.name }
         mAdapterAbilities = PokemonFormsRecyclerViewAdapter(
-            pokemonAbilities ?: listOf("No abilities")
+            pokemonAbilities ?: listOf(activity.getString(R.string.card_pokemon_abilities_none))
         )
         mBinding.rcvPokemonAbilities.adapter = mAdapterAbilities
         mAdapterAbilities.notifyDataSetChanged()
@@ -65,7 +68,7 @@ class PokemonRecyclerViewHolder(
         //held items
         val pokemonHeldItems = pokemon.heldItems.map { it.item.name }
         mAdapterHeldItems = PokemonFormsRecyclerViewAdapter(
-            pokemonHeldItems.ifEmpty { listOf("No held items") }
+            pokemonHeldItems.ifEmpty { listOf(activity.getString(R.string.card_pokemon_held_items_none)) }
         )
         mBinding.rcvPokemonHeldItems.adapter = mAdapterHeldItems
         mAdapterHeldItems.notifyDataSetChanged()

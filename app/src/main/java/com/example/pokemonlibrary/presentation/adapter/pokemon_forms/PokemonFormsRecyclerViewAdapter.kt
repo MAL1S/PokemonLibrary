@@ -18,6 +18,4 @@ class PokemonFormsRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = stats.size
-
-    fun getList() = stats
 }

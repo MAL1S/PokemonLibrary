@@ -12,9 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/app_margin_medium"
-        android:text="random"
+        android:text="@string/btn_menu_random"
         android:textColor="@color/black"
-        app:cornerRadius="12dp"
+        app:cornerRadius="@dimen/material_button_corner_radius"
         app:icon="@drawable/ic_random_24dp"
         app:iconPadding="-24dp"
         app:iconTint="@color/red"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/black"
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp" />
+        app:boxStrokeWidth="@dimen/material_button_stroke_width"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

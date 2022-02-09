@@ -6,4 +6,16 @@
     <string name="btn_menu_random">random</string>
     <string name="btn_menu_favorite">favorite</string>
     <string name="et_pokemon_search_hint">Desired pokemon name</string>
+    <string name="card_pokemon_height">Height:</string>
+    <string name="card_pokemon_weight">Weight:</string>
+    <string name="card_pokemon_forms">Forms:</string>
+    <string name="card_pokemon_abilities">Abilities:</string>
+    <string name="card_pokemon_held_items">Held items:</string>
+    <string name="card_btn_favorite_add">add in favorite</string>
+    <string name="search_not_found">Not found</string>
+    <string name="card_pokemon_forms_none">No forms</string>
+    <string name="card_pokemon_abilities_none">No abilities</string>
+    <string name="card_pokemon_held_items_none">No held items</string>
+    <string name="card_exp">Base exp: %d</string>
+    <string name="card_btn_favorite_remove">remove from favorite</string>
 </resources>

@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(
             .subscribe({
                 savePokemonIds(it)
             }, {
-                Log.d("AAA", "error2 = ${it}")
+                Log.d("pokemon_id_update", "error1 = ${it}")
             })
     }
 
@@ -49,7 +49,7 @@ class MainViewModel @Inject constructor(
                     )
                 })
             }, {
-                Log.d("AAA", "error = ${it}")
+                Log.d("pokemon_id_update", "error2 = ${it}")
             })
     }
 }

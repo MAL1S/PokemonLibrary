@@ -16,8 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val getPokemonUseCase: GetPokemonUseCase,
-    private val savePokemonUseCase: SavePokemonUseCase
+    private val getPokemonUseCase: GetPokemonUseCase
 ): ViewModel() {
 
     private val _pokemonLiveData: MutableLiveData<Pokemon> = MutableLiveData()
@@ -30,16 +29,6 @@ class SearchViewModel @Inject constructor(
             .subscribe(getPokemonObserver())
     }
 
-    fun addPokemonToFavorite(pokemon: Pokemon) {
-        val savePokemonSingleSubscribe = Single.just(pokemon)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .subscribe({
-                savePokemonUseCase.savePokemon(it)
-            }, {
-
-            })
-    }
 
     private fun getPokemonObserver(): Observer<Pokemon> {
         return object : Observer<Pokemon> {
@@ -48,12 +37,12 @@ class SearchViewModel @Inject constructor(
             }
 
             override fun onNext(t: Pokemon) {
-                Log.d("AAA", "LOADED")
+                Log.d("search_pokemon_list", "LOADED = $t")
                 _pokemonLiveData.postValue(t)
             }
 
             override fun onError(e: Throwable) {
-                Log.d("AAA", "ERROR")
+                Log.d("search_pokemon_list", "$e")
                 _pokemonLiveData.postValue(null)
             }
 

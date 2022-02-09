@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.pokemonlibrary.domain.model.Pokemon
 import com.example.pokemonlibrary.domain.usecase.GetPokemonUseCase
 import com.example.pokemonlibrary.domain.usecase.RemovePokemonUseCase
+import com.example.pokemonlibrary.domain.usecase.SavePokemonUseCase
 import io.reactivex.Observer
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class FavoriteViewModel @Inject constructor(
     private val getPokemonUseCase: GetPokemonUseCase,
-    private val removePokemonUseCase: RemovePokemonUseCase
+    private val removePokemonUseCase: RemovePokemonUseCase,
+    private val savePokemonUseCase: SavePokemonUseCase
 ) : ViewModel() {
 
     private val _favoritePokemonListLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()
@@ -27,6 +29,17 @@ class FavoriteViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(getFavoritePokemonListObserver())
+    }
+
+    fun addPokemonToFavorite(pokemon: Pokemon) {
+        val savePokemonSingleSubscribe = Single.just(pokemon)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe({
+                savePokemonUseCase.savePokemon(it)
+            }, {
+
+            })
     }
 
     fun removePokemonById(id: Int) {
@@ -47,13 +60,12 @@ class FavoriteViewModel @Inject constructor(
             }
 
             override fun onNext(t: List<Pokemon>) {
-                Log.d("AAA", "LOADED")
-                Log.d("BBB", "$t")
+                Log.d("pokemon_favorite", "LOADED = $t")
                 _favoritePokemonListLiveData.postValue(t)
             }
 
             override fun onError(e: Throwable) {
-                Log.d("AAA", "ERROR")
+                Log.d("pokemon_favorite", "$e")
             }
 
             override fun onComplete() {

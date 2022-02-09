@@ -2,6 +2,7 @@ package com.example.pokemonlibrary.presentation.favorite
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ class FavoriteFragment : Fragment(), OnPokemonCardClickListener {
     lateinit var mViewModel: FavoriteViewModel
 
     private lateinit var mAdapter: PokemonRecyclerViewAdapter
+
+    private var rcvState: Parcelable? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,15 +67,13 @@ class FavoriteFragment : Fragment(), OnPokemonCardClickListener {
                 mBinding.ivPokemonListEmpty.visibility = View.GONE
                 mBinding.rcvFavoritePokemon.visibility = View.VISIBLE
             }
+            mBinding.rcvFavoritePokemon.layoutManager?.onRestoreInstanceState(rcvState)
         }
     }
 
     override fun onRemoveFromFavoriteClicked(pokemon: Pokemon, position: Int) {
+        rcvState = mBinding.rcvFavoritePokemon.layoutManager?.onSaveInstanceState()
         mViewModel.removePokemonById(pokemon.id)
         mAdapter.notifyItemRemoved(position)
-    }
-
-    private fun updateIsEmptyListView() {
-
     }
 }
