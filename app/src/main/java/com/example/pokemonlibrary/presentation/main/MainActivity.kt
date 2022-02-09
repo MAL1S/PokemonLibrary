@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_PokemonLibrary)
         setContentView(R.layout.activity_main)
 
         (application as App).appComponent.inject(this)

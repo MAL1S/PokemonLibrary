@@ -56,11 +56,23 @@ class FavoriteFragment : Fragment(), OnPokemonCardClickListener {
             mAdapter = PokemonRecyclerViewAdapter(it, requireActivity(), this)
             mBinding.rcvFavoritePokemon.adapter = mAdapter
             mAdapter.notifyDataSetChanged()
+
+            if (it.isEmpty()) {
+                mBinding.ivPokemonListEmpty.visibility = View.VISIBLE
+                mBinding.rcvFavoritePokemon.visibility = View.GONE
+            } else {
+                mBinding.ivPokemonListEmpty.visibility = View.GONE
+                mBinding.rcvFavoritePokemon.visibility = View.VISIBLE
+            }
         }
     }
 
     override fun onRemoveFromFavoriteClicked(pokemon: Pokemon, position: Int) {
         mViewModel.removePokemonById(pokemon.id)
         mAdapter.notifyItemRemoved(position)
+    }
+
+    private fun updateIsEmptyListView() {
+
     }
 }
